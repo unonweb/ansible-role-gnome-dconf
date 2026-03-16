@@ -1,15 +1,21 @@
 # /org/gnome/shell
-- name: shell
-  block:
+- block:
 
   - name: remember-mount-password
     community.general.dconf:
       key: /org/gnome/shell/remember-mount-password
       value: "false" # keine cryptsetup passwörter speichern
 
+# /org/gtk/settings
+- block:
+
+  - name: sort-directories-first
+    community.general.dconf:
+      key: /org/gtk/settings/file-chooser/sort-directories-first
+      value: "true"
+
 # /org/gnome/desktop
-- name: dektop
-  block:
+- block:
 
   - name: autorun-never
     community.general.dconf:
@@ -42,8 +48,7 @@
       value: "false"
 
 # /org/gnome/settings-daemon
-- name: settings-daemon
-  block:
+- block:
 
   - name: idle-dim
     community.general.dconf:
@@ -66,8 +71,7 @@
       value: "0"
       
 # /org/gnome/calculator
-- name: calculator
-  block:
+- block:
 
   - name: calculator/refresh-interval
     community.general.dconf:
