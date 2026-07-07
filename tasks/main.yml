@@ -4,6 +4,17 @@
     - gnome-dconf
   block:
 
+  # assert
+  - name: Assertions for gnome-dconf role
+    ansible.builtin.assert:
+      that:
+      - gnome_dconf_user != None
+
+  # make sure user exists
+  - name: Check if user exists {{ gnome_dconf_user }}
+    command: "getent passwd {{ gnome_dconf_user }}"
+    changed_when: false
+
   # normal user
   - when: gnome_dconf_user != "global"
     become: true
