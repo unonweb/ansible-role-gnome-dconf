@@ -1,1 +1,2 @@
-tasks/franzk.yml
+.ansible/
+tasks/*franzk*.yml
