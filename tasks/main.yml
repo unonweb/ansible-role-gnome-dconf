@@ -24,8 +24,24 @@
       name: python3-psutil
       state: present
 
-  # normal user
-  - when: gnome_dconf_user != "global"
+  # assertions
+  - name: Assertions for gnome_dconf_configs
+    loop: "{{ gnome_dconf_configs }}"
+    loop_control:
+      loop_var: __gnome_dconf_item
+    ansible.builtin.assert:
+      that:
+      - __gnome_dconf_item.key != None
+      - __gnome_dconf_item.value != None
+
+  # apply
+  - when: gnome_dconf_configs | length > 1
+    name: Apply settings to dconf
     become: true
     become_user: "{{ gnome_dconf_user }}"
-    ansible.builtin.import_tasks: "{{ role_path }}/tasks/{{ gnome_dconf_subtask }}"
+    loop: "{{ gnome_dconf_configs }}"
+    loop_control:
+      loop_var: __gnome_dconf_item
+    community.general.dconf:
+      key: "{{ __gnome_dconf_item.key }}"
+      value: "{{ __gnome_dconf_item.value }}"

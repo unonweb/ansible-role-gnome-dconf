@@ -1,3 +1,5 @@
 ---
 gnome_dconf_user: # global
-gnome_dconf_subtask:
+gnome_dconf_configs: [] # array of dictionaries
+# - key
+#   value
