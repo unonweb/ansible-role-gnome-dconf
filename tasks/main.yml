@@ -9,7 +9,7 @@
     ansible.builtin.assert:
       that:
         - gnome_dconf_user != None
-        - ansible_facts.os_family is defined
+        - ansible_os_family is defined
 
   # make sure user exists
   - name: Check if user exists {{ gnome_dconf_user }}
@@ -18,7 +18,7 @@
 
   # install psutil
   - name: Apt install psutil requirement
-    when: ansible_facts.os_family == "debian"
+    when: ansible_os_family == "debian"
     become: true
     ansible.builtin.apt:
       name: python3-psutil
