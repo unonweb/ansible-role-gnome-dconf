@@ -1,6 +1,9 @@
 NOTES
 =====
 
+- https://docs.ansible.com/projects/ansible/latest/collections/community/general/dconf_module.html
+
+
 idle - screensaver - lock
 --------------------------
 
